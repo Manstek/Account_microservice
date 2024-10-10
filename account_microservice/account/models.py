@@ -1,14 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-ROLES = [
-    ('doctor', 'Доктор'),
-    ('user', 'Пользователь'),
-    ('admin', 'Администратор'),
-]
+from django.conf import settings
 
 
 class User(AbstractUser):
-    roles = models.CharField(max_length=50, choices=ROLES, default='user')
+    first_name = None
+    last_name = None
+
+    firstName = models.CharField(max_length=50)
+    lastName = models.CharField(max_length=50)
+    roles = models.CharField(
+        max_length=50, choices=settings.ROLES, default='user')
 
     def str(self):
         return self.username
