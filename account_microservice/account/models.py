@@ -9,7 +9,7 @@ class User(AbstractUser):
 
     firstName = models.CharField(max_length=50)
     lastName = models.CharField(max_length=50)
-    roles = models.CharField(
+    role = models.CharField(
         max_length=50, choices=settings.ROLES, default='user')
 
     def str(self):
