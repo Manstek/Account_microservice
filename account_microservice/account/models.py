@@ -12,5 +12,17 @@ class User(AbstractUser):
     role = models.CharField(
         max_length=50, choices=settings.ROLES, default='user')
 
+    @property
+    def full_name(self):
+        return f'{self.lastName} {self.firstName}'
+
+    def save(self, *args, **kwargs):
+        print(self.full_name)
+        if self.is_superuser:
+            self.role = 'Администратор'
+        if not self.password.startswith('pbkdf2_'):
+            self.set_password(self.password)
+        return super().save(*args, **kwargs)
+
     def str(self):
         return self.username
