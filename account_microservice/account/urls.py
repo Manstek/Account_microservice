@@ -7,7 +7,8 @@ from rest_framework_simplejwt.views import (
 from rest_framework.routers import DefaultRouter
 
 from .views import (
-    RetrieveUserView, UpdateUserView, CustomAccountViewSet, DoctorViewSet)
+    RetrieveUserView, UpdateUserView, CustomAccountViewSet,
+    DoctorViewSet, introspect_token)
 
 router = DefaultRouter()
 router.register(r'Accounts', CustomAccountViewSet)
@@ -17,6 +18,7 @@ urlpatterns = [
     path('Authentication/SignUp/', UserViewSet.as_view({'post': 'create'})),
     path('Authentication/SignIn/', TokenObtainPairView.as_view()),
     path('Authentication/Refresh/', TokenRefreshView.as_view()),
+    path('Authentication/Validate/', introspect_token),
 
     path('Accounts/Me/', RetrieveUserView.as_view()),
     path('Accounts/Update/', UpdateUserView.as_view()),
