@@ -22,6 +22,3 @@ urlpatterns = [
     path('Accounts/Update/', UpdateUserView.as_view()),
     path('', include(router.urls)),
 ]
-
-# План на завтра:
-# 1. Фильтрация
